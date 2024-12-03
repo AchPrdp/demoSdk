@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.app.yoholiday.common.EventType
 import com.app.yoholiday.presentation.login.AuthActivity
 import com.app.yoholiday.ui.theme.YoHolidayTheme
 import com.app.yoholiday.vm.SessionViewModel
@@ -157,7 +158,7 @@ class MainActivity : ComponentActivity() {
     private fun storeLogEvent() {
         sessionViewModel.storeNewEvents(
             eventKey = "MainActivity",
-            eventValue = "Button Click"
+            eventValue = EventType.ButtonClick.name
         )
     }
 }

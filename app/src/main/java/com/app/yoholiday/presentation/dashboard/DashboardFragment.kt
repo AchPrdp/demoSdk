@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.app.yoholiday.R
 import com.app.yoholiday.common.BaseFragment
+import com.app.yoholiday.common.EventType
 import com.app.yoholiday.databinding.FragmentDashboardBinding
 import com.app.yoholiday.vm.SessionViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,7 +46,7 @@ class DashboardFragment :
     private fun storeLogEvent() {
         sessionViewModel.storeNewEvents(
             eventKey = "DashboardFragment",
-            eventValue = "Page Visit"
+            eventValue = EventType.PageVisit.name
         )
     }
 }

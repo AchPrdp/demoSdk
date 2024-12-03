@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.app.yoholiday.R
 import com.app.yoholiday.common.BaseFragment
+import com.app.yoholiday.common.EventType
 import com.app.yoholiday.databinding.FragmentRegisterBinding
 import com.app.yoholiday.vm.SessionViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +41,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private fun storeLogEvent() {
         sessionViewModel.storeNewEvents(
             eventKey = "RegisterFragment",
-            eventValue = "Page Visit"
+            eventValue = EventType.PageVisit.name
         )
     }
 }

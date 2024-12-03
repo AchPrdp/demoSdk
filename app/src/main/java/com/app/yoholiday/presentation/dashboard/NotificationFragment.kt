@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.app.yoholiday.R
 import com.app.yoholiday.common.BaseFragment
+import com.app.yoholiday.common.EventType
 import com.app.yoholiday.databinding.FragmentNotificationBinding
 import com.app.yoholiday.vm.SessionViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +40,7 @@ class NotificationFragment :
     private fun storeLogEvent() {
         sessionViewModel.storeNewEvents(
             eventKey = "NotificationFragment",
-            eventValue = "Page Visit"
+            eventValue = EventType.PageVisit.name
         )
     }
 

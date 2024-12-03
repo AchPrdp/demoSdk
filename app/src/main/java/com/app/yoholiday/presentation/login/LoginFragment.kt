@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.app.mylibrary.repo.EventRepository
 import com.app.yoholiday.R
 import com.app.yoholiday.common.BaseFragment
+import com.app.yoholiday.common.EventType
 import com.app.yoholiday.databinding.FragmentLoginBinding
 import com.app.yoholiday.presentation.dashboard.DashboardActivity
 import com.app.yoholiday.vm.SessionViewModel
@@ -17,11 +18,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-    @Inject
-    lateinit var eventRepository: EventRepository
-
     private val sessionViewModel by viewModels<SessionViewModel>()
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,7 +60,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private fun storeLogEvent() {
         sessionViewModel.storeNewEvents(
             eventKey = "LoginFragment",
-            eventValue = "Page Visit"
+            eventValue = EventType.PageVisit.name
         )
     }
 }
