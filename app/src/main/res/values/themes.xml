@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.YoHoliday" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="AppCompatTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--        &lt;!&ndash; Customize your theme &ndash;&gt;-->
+        <!--        <item name="colorPrimary">#6200EE</item>-->
+        <!--        <item name="colorPrimaryDark">#3700B3</item>-->
+        <!--        <item name="colorAccent">#03DAC5</item>-->
+    </style>
+
+    <style name="ButtonTheme" parent="Widget.AppCompat.Button">
+        <item name="colorButtonNormal">#FFF15657</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:bottomLeftRadius">8dp</item>
+        <item name="android:topLeftRadius">8dp</item>
+        <item name="android:bottomRightRadius">8dp</item>
+        <item name="android:topRightRadius">8dp</item>
+    </style>
+</resources>
