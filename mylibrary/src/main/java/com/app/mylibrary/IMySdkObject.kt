@@ -1,7 +1,9 @@
 package com.app.mylibrary
 
 import android.content.Context
+import com.app.mylibrary.api.ResponseBodyDto
 import com.app.mylibrary.repo.EventRepository
+import com.app.mylibrary.util.NetworkResult
 
 interface IMySdkObject {
 
@@ -19,5 +21,5 @@ interface IMySdkObject {
 
     suspend fun addAnalyticsLog(key: String, value: String)
 
-    fun initEventRepo(eventRepository: EventRepository)
+    suspend fun syncEvents() : NetworkResult<ResponseBodyDto>
 }

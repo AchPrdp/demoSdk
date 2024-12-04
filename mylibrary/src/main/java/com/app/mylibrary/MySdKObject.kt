@@ -1,7 +1,8 @@
 package com.app.mylibrary
 
 import android.content.Context
-import com.app.mylibrary.repo.EventRepository
+import com.app.mylibrary.api.ResponseBodyDto
+import com.app.mylibrary.util.NetworkResult
 
 object MySdKObject {
 
@@ -37,8 +38,8 @@ object MySdKObject {
     }
 
     @JvmStatic
-    fun initEventRepo(eventRepository: EventRepository) {
-        mySdkObj.initEventRepo(eventRepository)
+    suspend fun syncEvents(): NetworkResult<ResponseBodyDto> {
+        return mySdkObj.syncEvents()
     }
 
     private val mySdkObj: IMySdkObject by lazy {

@@ -1,11 +1,14 @@
 package com.app.mylibrary
 
 import android.content.Context
+import com.app.mylibrary.api.ResponseBodyDto
 import com.app.mylibrary.db.entity.Events
 import com.app.mylibrary.repo.EventRepository
 import com.app.mylibrary.repo.SessionRepository
 import com.app.mylibrary.repo.SessionRepositoryImpl
 import com.app.mylibrary.sessionHelper.SessionManager
+import com.app.mylibrary.util.NetworkResult
+import dagger.hilt.android.EntryPointAccessors
 
 class MySdkImpl : IMySdkObject {
 
@@ -28,6 +31,7 @@ class MySdkImpl : IMySdkObject {
 
                 // implement sdk initialize logic with application context
                 applicationContext = context
+
                 println("SessionManager : initializeSdk")
                 sessionManager = SessionManager()
                 sessionRepository = sessionRepo
@@ -50,6 +54,7 @@ class MySdkImpl : IMySdkObject {
 
     override suspend fun addAnalyticsLog(key: String, value: String) {
         // implement add analytics event or log
+
         if (!isSdkInitialize || !(this::eventRepository.isInitialized)) return
         if (isSessionActive()) {
             eventRepository.recordEvent(
@@ -64,8 +69,11 @@ class MySdkImpl : IMySdkObject {
         }
     }
 
-    override fun initEventRepo(eventRepository: EventRepository) {
-        this.eventRepository = eventRepository
+    override suspend fun syncEvents(): NetworkResult<ResponseBodyDto> {
+        if (!this::eventRepository.isInitialized) {
+            initEventRepo()
+        }
+        return eventRepository.syncEvent()
     }
 
     private val sessionRepo: SessionRepository by lazy {
@@ -82,5 +90,13 @@ class MySdkImpl : IMySdkObject {
 
     private fun checkSessionRepoInit(): Boolean {
         return this::sessionRepository.isInitialized
+    }
+
+
+    private fun initEventRepo() {
+        eventRepository = EntryPointAccessors.fromApplication(
+            applicationContext,
+            RepoEntryPoint::class.java
+        ).eventRepository()
     }
 }

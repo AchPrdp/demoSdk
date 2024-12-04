@@ -3,16 +3,11 @@ package com.app.yoholiday.vm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.mylibrary.MySdKObject
-import com.app.mylibrary.repo.EventRepository
 import com.app.mylibrary.util.NetworkResult
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class SessionViewModel @Inject constructor(
-    private val eventRepository: EventRepository
-) : ViewModel() {
+//@HiltViewModel
+class SessionViewModel : ViewModel() {
 
     /**
      * Function to Start Session
@@ -21,7 +16,7 @@ class SessionViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 MySdKObject.startSession()
-                MySdKObject.initEventRepo(eventRepository = eventRepository)
+//                MySdKObject.initEventRepo()
             } catch (ex: Exception) {
                 println("Session Start Exception : ${ex.message}")
             }
@@ -45,6 +40,7 @@ class SessionViewModel @Inject constructor(
      * Function to Store Event Logs
      */
     fun storeNewEvents(eventKey: String, eventValue: String) {
+        updateEvents()
         viewModelScope.launch {
             try {
                 MySdKObject.addEventLog(
@@ -63,7 +59,7 @@ class SessionViewModel @Inject constructor(
      */
     fun updateEvents() {
         viewModelScope.launch {
-            when (val data = eventRepository.syncEvent()) {
+            when (val data = MySdKObject.syncEvents()) {
                 is NetworkResult.Error -> {
                     println("Error occurred on Api call ${data.errorMessage}")
                 }
